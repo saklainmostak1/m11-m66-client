@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const Login = () => {
+    const {loginWithEmailPAss} = useContext(AuthContext)
 
     const handleLogin = event =>{
         event.preventDefault()
+        const form = event.target 
+        const email = form.email.value
+        const password = form.password.value
+        loginWithEmailPAss(email,password)
+        .then(result => {
+            const user = result.user
+            console.log(user)
+            form.reset('')
+            toast.success('Login SucessFully')
+        })
+        .catch(error =>{
+            console.error(error)
+        })
     }
     return (
         <div>
@@ -29,7 +45,7 @@ const Login = () => {
           </label>
           <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            <Link href="#" className="label-text-alt link link-hover">Forgot password?</Link>
           </label>
          
         </div>
