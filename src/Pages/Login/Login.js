@@ -14,7 +14,7 @@ const Login = () => {
     <div className="text-center lg:text-left">
       <img className='w-3/4' src={img} alt="" />
     </div>
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-5 ">
     <h1 className="text-5xl font-bold text-center">Login now!</h1>
       <form onSubmit={handleLogin} className="card-body">
         <div className="form-control">
@@ -29,12 +29,16 @@ const Login = () => {
           </label>
           <input type="password" name='password' placeholder="password" className="input input-bordered" required/>
           <label className="label">
-           <p>If You Don't Have Any Account Please - <Link className='text-orange-600 underline' to='/register'>Register</Link> </p>
+            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
+         
         </div>
         <div className="form-control mt-6">
             <input type="submit" className="btn btn-primary" value="login" /> 
         </div>
+        <label className="label">
+           <p className='text-center mt-5'>New To Genius Car - <Link className='text-orange-600 font-bold' to='/register'>Sign Up</Link> </p>
+          </label>
       </form>
     </div>
   </div>
