@@ -5,11 +5,24 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const Header = () => {
   const { logOut, user } = useContext(AuthContext)
+  const signOut = event =>{
+    event.preventDefault()
+    logOut()
+    .then(result => {
+      const user = result.user
+      console.log(user)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
   const menuItems = <>
     <li className='font-semibold'><Link className='mr-5' to='/'>Home</Link></li>
     {
       user?.uid ?
-        <button className="btn btn-outline btn-success" onClick={logOut} >LogOut</button>
+        <>
+        <button className="btn btn-outline btn-success" onClick={signOut} >LogOut</button>
+        </>
         :
         <>
           <li className='font-semibold'><Link to='/login'>Login</Link></li>
@@ -33,6 +46,7 @@ const Header = () => {
           </div>
           <Link to='/' className="btn btn-ghost normal-case text-xl">
             <img src={logo} alt="" />
+            
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
