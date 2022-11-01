@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import OrderRow from './OrderRow';
 
 const Orders = () => {
     const {user} = useContext(AuthContext)
-    const [orders, setOrders] = useState({})
-
-    useEffect(() => {
-        fetch( `http://localhost:5000/orders?email=${user?.email}`)
-        .then(Response => Response.json())
+    const [orders, setOrders] = useState([])
+    console.log(orders)
+    useEffect(() =>{
+        fetch(`http://localhost:5000/orders?email=${user?.email}`)
+        .then(Response=>Response.json())
         .then(data => setOrders(data))
-    },[user?.email])
+    }, [user?.email])
     return (
         <div>
             <h2 className="text-5xl">You Have {orders.length}</h2>
@@ -26,23 +27,17 @@ const Orders = () => {
         <th>Name</th>
         <th>Job</th>
         <th>Favorite Color</th>
-        <th></th>
+        <th>Message</th>
       </tr>
     </thead>
     <tbody> 
-      
+      {
+        orders.map(order => <OrderRow
+        key={order._id}
+        order={order}
+        ></OrderRow>)
+      }
     </tbody>
-
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </tfoot>
-    
   </table>
 </div>
         </div>
