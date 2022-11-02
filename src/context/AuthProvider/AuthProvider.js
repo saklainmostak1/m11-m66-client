@@ -11,14 +11,16 @@ const AuthProvider = ({children}) => {
 
 
     const createUser = (email, password) =>{
-        setUser(true)
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
     const loginWithEmailPAss = (email, password) =>{
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logOut = () =>{
+        setLoading(true)
         return signOut(auth)
     }
     useEffect(()=>{

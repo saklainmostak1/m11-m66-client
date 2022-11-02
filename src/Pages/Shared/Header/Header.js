@@ -21,6 +21,7 @@ const Header = () => {
     {
       user?.uid ?
         <>
+         <li className='font-semibold mr-5'><Link to='/orders'>Orders</Link></li>
         <button className="btn btn-outline btn-success" onClick={signOut} >LogOut</button>
         </>
         :
