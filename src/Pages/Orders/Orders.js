@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import OrderRow from './OrderRow';
 
@@ -44,7 +43,7 @@ const Orders = () => {
                 const remaining = orders.filter(odr => odr._id !== id)
                 const approving = orders.find(odr => odr._id === id)
                 approving.status= "approved"
-                const newsOrders = [...remaining, approving]
+                const newsOrders = [approving, ...remaining ]
                 setOrders(newsOrders)
             }
         })

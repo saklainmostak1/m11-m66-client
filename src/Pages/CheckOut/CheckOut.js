@@ -15,6 +15,7 @@ const CheckOut = () => {
         const email = user?.email || 'unregister'
         const phone = form.phone.value
         const message = form.message.value
+        form.reset()
         const order = {
             service: _id,
             serviceName: title,
