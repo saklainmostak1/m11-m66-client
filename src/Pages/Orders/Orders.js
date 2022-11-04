@@ -7,7 +7,11 @@ const Orders = () => {
     const [orders, setOrders] = useState([])
     console.log(orders)
     useEffect(() =>{
-        fetch(`http://localhost:5000/orders?email=${user?.email}`)
+        fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        })
         .then(Response=>Response.json())
         .then(data => setOrders(data))
     }, [user?.email])
