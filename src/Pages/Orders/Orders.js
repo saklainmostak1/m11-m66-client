@@ -3,7 +3,7 @@ import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import OrderRow from './OrderRow';
 
 const Orders = () => {
-    const {user} = useContext(AuthContext)
+    const {user, logOut} = useContext(AuthContext)
     const [orders, setOrders] = useState([])
     console.log(orders)
     useEffect(() =>{
@@ -12,9 +12,17 @@ const Orders = () => {
             authorization: `Bearer ${localStorage.getItem('token')}`
           }
         })
-        .then(Response=>Response.json())
-        .then(data => setOrders(data))
-    }, [user?.email])
+        .then(Response=>{
+         if(Response.status === 401 || Response.status === 403){
+          return logOut()
+         }
+         return Response.json()
+        })
+        .then(data => {
+          setOrders(data)
+          // console.log('inside order',data);
+        })
+    }, [user?.email, logOut])
     const handleDelete = id => {
         const proceed = window.confirm('Are You Sure')
         if (proceed) {
